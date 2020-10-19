@@ -34,7 +34,7 @@ namespace DevMath
             //Vector2 lineStartToCircle = circle.Position - Position;
             //float angle = Vector2.Angle(lineStartToEnd, lineStartToCircle);
 
-            if (lineEndToCircle.Magnitude <= radius)
+            if (lineEndToCircle.Magnitude <= radius + intersectRadius)
             {
                 if (Vector2.Dot(Direction, vectorPlayerToCircle) > 0) // https://math.stackexchange.com/questions/1330210/how-to-check-if-a-point-is-in-the-direction-of-the-normal-of-a-plane
                 {
