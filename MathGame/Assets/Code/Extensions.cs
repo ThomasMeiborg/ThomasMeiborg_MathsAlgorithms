@@ -17,32 +17,44 @@ public static class Extensions
         return new DevMath.Vector2(v.x, v.y);
     }
 
+    public static Vector3 ToUnity(this DevMath.Vector3 v)
+    {
+        return new Vector3(v.x, v.y, v.z);
+    }
+
+    public static DevMath.Vector3 ToDevMath(this Vector3 v)
+    {
+        return new DevMath.Vector3(v.x, v.y, v.z);
+    }
+    public static Vector4 ToUnity(this DevMath.Vector4 v)
+    {
+        return new Vector4(v.x, v.y, v.z, v.w);
+    }
+
+    public static DevMath.Vector4 ToDevMath(this Vector4 v)
+    {
+        return new DevMath.Vector4(v.x, v.y, v.z, v.w);
+    }
+
     public static Matrix4x4 ToUnity(this DevMath.Matrix4x4 m)
     {
         return new Matrix4x4
             (
-            new Vector4(m.m[0][0], m.m[0][1], m.m[0][2], m.m[0][3]), 
-            new Vector4(m.m[1][0], m.m[1][1], m.m[1][2], m.m[1][3]), 
-            new Vector4(m.m[2][0], m.m[2][1], m.m[2][2], m.m[2][3]), 
-            new Vector4(m.m[3][0], m.m[3][1], m.m[3][2], m.m[3][3])
+            new Vector4(m.m00, m.m10, m.m20, m.m30),
+            new Vector4(m.m01, m.m11, m.m21, m.m31), 
+            new Vector4(m.m02, m.m12, m.m22, m.m32), 
+            new Vector4(m.m03, m.m13, m.m23, m.m33) 
             );
     }
 
     public static DevMath.Matrix4x4 ToDevMath(this Matrix4x4 m)
     {
-        //return new DevMath.Matrix4x4
-        //(
-        //    m.m00, m.m01, m.m02, m.m03,
-        //    m.m10, m.m11, m.m12, m.m13,
-        //    m.m20, m.m21, m.m22, m.m23,
-        //    m.m30, m.m31, m.m32, m.m33
-        //);
-        return new DevMath.Matrix4x4(new float[4][]
-        {
-            new float[4] { m.m00, m.m01, m.m02, m.m03 },
-            new float[4] { m.m10, m.m11, m.m12, m.m13 },
-            new float[4] { m.m20, m.m21, m.m22, m.m23 },
-            new float[4] { m.m30, m.m31, m.m32, m.m33 }
-        });
+        return new DevMath.Matrix4x4
+        (
+            new DevMath.Vector4(m.m00, m.m10, m.m20, m.m30),
+            new DevMath.Vector4(m.m01, m.m11, m.m21, m.m31),
+            new DevMath.Vector4(m.m02, m.m12, m.m22, m.m32),
+            new DevMath.Vector4(m.m03, m.m13, m.m23, m.m33) 
+        );
     }
 }

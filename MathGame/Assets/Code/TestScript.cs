@@ -11,8 +11,17 @@ public class TestScript : MonoBehaviour
 
     Matrix4x4 unityMatrix;
     DevMath.Matrix4x4 testMatrix;
+    DevMath.Matrix4x4 testMatrix2;
 
-    float[][] valuesToMatrix = new float[4][] { new float[4], new float[4], new float[4], new float[4] };
+    float[][] valuesToMatrix = new float[6][] { new float[4], new float[4], new float[4], new float[4], new float[5], new float[6] };
+    DevMath.Vector4[] vectorToMatrix = new DevMath.Vector4[4] { new DevMath.Vector4(1, 2, 3, 4), new DevMath.Vector4(5, 6, 7, 8), new DevMath.Vector4(9, 10, 11, 12), new DevMath.Vector4(13, 14, 15, 16) };
+    Vector4[] unityVectorToMatrix = new Vector4[4] { new Vector4(1, 2, 3, 4), new Vector4(5, 6, 7, 8), new Vector4(9, 10, 11, 12), new Vector4(13, 14, 15, 16) };
+    DevMath.Matrix4x4 multiplicationMatrix;
+    DevMath.Matrix4x4 multiplicationMatrixDevUD;
+    DevMath.Matrix4x4 multiplicationMatrixUDUD;
+    Matrix4x4 multiplicationMatrixDUDU;
+    Matrix4x4 multiplicationMatrixUDU;
+    Matrix4x4 unityMPMatrix;
 
     void Start()
     {
@@ -21,8 +30,36 @@ public class TestScript : MonoBehaviour
         valuesToMatrix[1] = new float[4] { 5, 6, 7, 8 };
         valuesToMatrix[2] = new float[4] { 9, 10, 11, 12 };
         valuesToMatrix[3] = new float[4] { 13, 14, 15, 16 };
-        testMatrix.m = valuesToMatrix;
-        //print(testMatrix.m[0][1] + ", " + testMatrix.m[3][4]);;
+        valuesToMatrix[4] = new float[5] { 20, 21, 22, 23, 24 };
+        valuesToMatrix[5] = new float[6] { 30, 31, 32, 33, 34, 35 };
+
+        //DevMath.Vector4 mergeUAndDevMathVector = unityVectorToMatrix[1].ToDevMath();
+        Vector4 mergeUAndDevMathVector = vectorToMatrix[3].ToUnity();
+        print("DevMath Vector4" + mergeUAndDevMathVector);
+        //print("DevMath Vector(" + mergeUAndDevMathVector.x + ", " + mergeUAndDevMathVector.y + ", " + mergeUAndDevMathVector.z + ", " + mergeUAndDevMathVector.w+ ")");
+
+        unityMatrix = new Matrix4x4(unityVectorToMatrix[0], unityVectorToMatrix[1], unityVectorToMatrix[2], unityVectorToMatrix[3]);
+        testMatrix = new DevMath.Matrix4x4(vectorToMatrix[0],vectorToMatrix[1],vectorToMatrix[2], vectorToMatrix[3]);
+        
+        //testMatrix2.m = valuesToMatrix;
+        //print("values: " + testMatrix.ToUnity());
+        
+        multiplicationMatrix = testMatrix * testMatrix;
+        multiplicationMatrixDevUD = testMatrix * unityMatrix.ToDevMath();
+        multiplicationMatrixUDUD = unityMatrix.ToDevMath() * unityMatrix.ToDevMath();
+        multiplicationMatrixDUDU = testMatrix.ToUnity() * testMatrix.ToUnity();
+        multiplicationMatrixUDU = unityMatrix * testMatrix.ToUnity();
+        unityMPMatrix = unityMatrix * unityMatrix;
+        print("My DevMath matrix: " + testMatrix.ToUnity()); 
+        print("My Unity matrix: " + unityMatrix);
+        print("Multiplication Matrix DevDev: " + multiplicationMatrix.ToUnity());
+        print("Multiplication Matrix DevUD  : " + multiplicationMatrixDevUD.ToUnity());
+        print("Multiplication Matrix UDUD: " + multiplicationMatrixUDUD.ToUnity());
+        print("Multiplication Matrix DUDU: " + multiplicationMatrixDUDU);
+        print("Multiplication Matrix UDU: " + multiplicationMatrixUDU.ToDevMath().ToUnity());
+        print("Multiplication Matrix UU    : " + unityMPMatrix);
+        print("^^ ALL MATRICES ABOVE SHOULD BE EQUAL ^^");
+
 
         print("Dot = " + DevMath.Vector2.Dot(testV1, testV2) + ", Normalized Dot = " + DevMath.Vector2.Dot(testV1.Normalized, testV2.Normalized) + ", AngleInRad = " + DevMath.Vector2.Angle(testV1, testV2) + ", AngleInDeg = " + DevMath.DevMath.RadToDeg(DevMath.Vector2.Angle(testV1, testV2)));
         print("DirectionFromAngle = (" + DevMath.Vector2.DirectionFromAngle(DevMath.Vector2.Angle(testV1, testV2)).x + ", " + DevMath.Vector2.DirectionFromAngle(DevMath.Vector2.Angle(testV1, testV2)).y + ")");

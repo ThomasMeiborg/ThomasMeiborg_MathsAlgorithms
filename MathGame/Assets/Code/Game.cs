@@ -5,6 +5,9 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     public float amountOfEnemies;
+    public int amountHitByLine = 0;
+    Projectile dummyProjectile;
+    float projectileRadius;
 
     public static Game Instance
     {
@@ -39,6 +42,8 @@ public class Game : MonoBehaviour
         }
 
         projectiles = new List<Projectile>();
+        dummyProjectile = new Projectile(new DevMath.Vector2(9999, 9999), new DevMath.Vector2(0, 0), 0, 0);
+        projectileRadius = dummyProjectile.Circle.Radius;
     }
 
     private void OnGUI()
@@ -133,22 +138,32 @@ public class Game : MonoBehaviour
                 projectiles.RemoveAt(i);
             }
         }
-
-        foreach(Enemy e in enemies)
+        
+        foreach (Enemy e in enemies)
         {
-            if(e.Circle.CollidesWith(player.Circle))
+            //add hit count
+            if (e.Circle.CollidesWith(player.Circle))
             {
                 player = null;
             }
-            if (player.Line.IntersectsWith(e.Circle))
+            if (player.Line.IntersectsWith(e.Circle, projectileRadius))
             {
-                e.isHitByLine = true;
+                if (!e.isHitByLine)
+                {
+                    amountHitByLine++;
+                    e.isHitByLine = true;
+                }
                 player.projectileWillHit = true;
             }
-            if (!player.Line.IntersectsWith(e.Circle) && e.isHitByLine)
+            if (!player.Line.IntersectsWith(e.Circle, projectileRadius) && e.isHitByLine)
             {
-                player.projectileWillHit = false;
                 e.isHitByLine = false;
+                amountHitByLine--;
+                if (amountHitByLine < 1)
+                {
+                    player.projectileWillHit = false; 
+                }
+
             }
         }
 
@@ -158,6 +173,15 @@ public class Game : MonoBehaviour
             {
                 if(projectiles[i].Circle.CollidesWith(enemies[j].Circle))
                 {
+                    if (enemies[j].isHitByLine)
+                    {
+                        amountHitByLine--;
+                        enemies[j].isHitByLine = false;
+                    }
+                    if (amountHitByLine < 1)
+                    {
+                        player.projectileWillHit = false;
+                    }
                     enemies.RemoveAt(j);
                     amountOfEnemies--;
                     projectiles.RemoveAt(i);

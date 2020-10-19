@@ -19,7 +19,7 @@ namespace DevMath
             get; set;
         }
         
-        public bool IntersectsWith(Circle circle)
+        public bool IntersectsWith(Circle circle, float intersectRadius = 0)
         {
             float radius = circle.Radius;
 
@@ -34,12 +34,12 @@ namespace DevMath
             //Vector2 lineStartToCircle = circle.Position - Position;
             //float angle = Vector2.Angle(lineStartToEnd, lineStartToCircle);
 
-            if (lineEndToCircle.Magnitude < radius)
+            if (lineEndToCircle.Magnitude <= radius)
             {
                 if (Vector2.Dot(Direction, vectorPlayerToCircle) > 0) // https://math.stackexchange.com/questions/1330210/how-to-check-if-a-point-is-in-the-direction-of-the-normal-of-a-plane
                 {
                     float rejectionScalar = lineEndToCircle.Magnitude * (float)Math.Sin(angle);
-                    if ((float)Math.Abs(rejectionScalar) <= circle.Radius)
+                    if ((float)Math.Abs(rejectionScalar) <= circle.Radius + intersectRadius)
                     {
                         return true;
                     }
@@ -52,7 +52,7 @@ namespace DevMath
                 if (Vector2.Dot(Direction, vectorPlayerToCircle) > 0)
                 {
                     float rejectionScalar = lineEndToCircle.Magnitude * (float)Math.Sin(angle);
-                    if ((float)Math.Abs(rejectionScalar) <= circle.Radius)
+                    if ((float)Math.Abs(rejectionScalar) <= circle.Radius + intersectRadius)
                     {
                         return true;
                     }

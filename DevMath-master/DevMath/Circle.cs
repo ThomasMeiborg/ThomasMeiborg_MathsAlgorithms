@@ -18,12 +18,13 @@ namespace DevMath
             get; set;
         }
 
-        public bool CollidesWith(Circle circle)
+        public bool CollidesWith(Circle circle, float collisionOffset = 1)
         {
+            DevMath.Clamp(collisionOffset, 0, 1);
             Vector2 distanceToCol = circle.Position - Position;
-            //float distanceLength = Mathf.Sqrt(Mathf.Pow(distanceToCol.x, 2) + Mathf.Pow(distanceToCol.y, 2)) - circle.Radius - Radius;
-            float distanceLength = (float)(Math.Pow(distanceToCol.x, 2) + Math.Pow(distanceToCol.y, 2)) - (float)Math.Pow(circle.Radius, 2) - (float)Math.Pow(Radius, 2); //Same results as the commented line above but less processor clock cycles.
-            if (distanceLength <=0)
+            float distanceLength = (float)Math.Sqrt(Math.Pow(distanceToCol.x, 2) + Math.Pow(distanceToCol.y, 2)) - circle.Radius - (Radius * collisionOffset);
+            //float distanceLength = (float)(Math.Pow(distanceToCol.x, 2) + (float)Math.Pow(distanceToCol.y, 2)) - (float)Math.Pow(circle.Radius, 2) - (float)Math.Pow(Radius, 2); //Same results as the commented line above but less processor clock cycles.
+            if (distanceLength <= 0)
             {
                 return true;
             }
