@@ -69,6 +69,16 @@ public class TestScript : MonoBehaviour
         print(DevMath.DevMath.RadToDeg(Mathf.Acos(-68 / (testV1.Magnitude * testV2.Magnitude))));
         print(DevMath.DevMath.RadToDeg(Mathf.Acos(DevMath.Vector2.Dot(testV1, testV2) / (testV1.Magnitude * testV2.Magnitude))));
         print("Atan2: Is this " + DevMath.DevMath.RadToDeg(Mathf.Atan2(testV2.y - testV1.y, testV2.x - testV2.x)) + " the same as " + DevMath.DevMath.RadToDeg((Mathf.Atan2(testV2.y, testV2.x) - Mathf.Atan2(testV1.y, testV1.x))) + " ? Nope...");
-        
+
+        print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-5, -10, -7.5f));
+        print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-10, -5, -7.5f));
+        print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(5, 10, 7.5f));
+        print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(10, 5, 7.5f));
+        print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-5, 5, 0));
+        print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-10, 5, -2.5f));
+        print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-5, -10, 80));
+        print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-10, -5, 80f));
+        print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-5, -10, -80));
+        print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-10, -5, -80f));
     }
 }

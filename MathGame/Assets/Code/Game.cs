@@ -58,7 +58,7 @@ public class Game : MonoBehaviour
         {
             //Use Sin to animate the colour of the text (GUI.color) between alpha 0.5 and 1.0
             float sineWave = Mathf.Sin(Time.realtimeSinceStartup * 2); // returns value between -1 and 1.
-            float alpha = DevMath.DevMath.Lerp(0.5f, 1, Mathf.InverseLerp(-1, 1, sineWave));
+            float alpha = DevMath.DevMath.Lerp(0.5f, 1, DevMath.DevMath.InverseLerp(-1, 1, sineWave));
             GUI.color = new Color(1, 1, 1, alpha);
 
             GUIStyle style = new GUIStyle(GUI.skin.label);

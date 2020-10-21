@@ -24,6 +24,28 @@ namespace DevMath
             return value;
         }
 
+        public static float InverseLerp(float a, float b, float inbetweenValue)
+        {
+            if (a < b)
+            {
+                if (a > 0 && inbetweenValue < a) { inbetweenValue = a; }
+                if (a < 0 && inbetweenValue < a) { inbetweenValue = a; }
+                if (b < 0 && inbetweenValue > b) { inbetweenValue = b; }
+                if (b > 0 && inbetweenValue > b) { inbetweenValue = b; }
+            }
+
+            if (a > b)
+            {
+                if (b > 0 && inbetweenValue < b) { inbetweenValue = b; }
+                if (b < 0 && inbetweenValue < b) { inbetweenValue = b; }
+                if (a < 0 && inbetweenValue > a) { inbetweenValue = a; }
+                if (a > 0 && inbetweenValue > a) { inbetweenValue = a; }
+            }
+
+            float lerpValue = (inbetweenValue - a) / (b - a);
+            return lerpValue;
+        }
+
         public static float DistanceTraveled(float startVelocity, float acceleration, float time)
         {
             float distanceTraveled = startVelocity * time + (0.5f * acceleration * (float)Math.Pow(time, 2));
