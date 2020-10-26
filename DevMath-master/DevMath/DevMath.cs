@@ -84,7 +84,3 @@ namespace DevMath
         }
     }
 }
-
-//VRAAGJES:
-// Om met matrices met elkaar te kunnnen vermenigvuldigen moeten het aantal rijen van LHs gelijk zijn aan het aantal kolommen van RHS.
-// Angle functie returns NaN.... er wordt gedeeld door 0...

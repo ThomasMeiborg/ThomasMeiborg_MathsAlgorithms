@@ -114,8 +114,10 @@ namespace DevMath
         
         public static Vector2 operator /(Vector2 lhs, float scalar)
         {
-            // Could add an extra check in case the scalar == 0 but I'm not sure that would help te code user in the long run.
-            // Returning NaN might be clearer feedback that you shouldn't divide by 0 and it wouldn't return an unexpected value.
+            if (scalar == 0)
+            {
+                Console.WriteLine("WARNING: division by 0");
+            }
             return new Vector2(lhs.x / scalar, lhs.y / scalar);
         }
     }

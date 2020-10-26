@@ -141,7 +141,6 @@ public class Game : MonoBehaviour
         
         foreach (Enemy e in enemies)
         {
-            //add hit count
             if (e.Circle.CollidesWith(player.Circle))
             {
                 player = null;

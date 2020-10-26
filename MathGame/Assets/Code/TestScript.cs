@@ -40,18 +40,20 @@ public class TestScript : MonoBehaviour
 
         unityMatrix = new Matrix4x4(unityVectorToMatrix[0], unityVectorToMatrix[1], unityVectorToMatrix[2], unityVectorToMatrix[3]);
         testMatrix = new DevMath.Matrix4x4(vectorToMatrix[0],vectorToMatrix[1],vectorToMatrix[2], vectorToMatrix[3]);
-        
+
         //testMatrix2.m = valuesToMatrix;
         //print("values: " + testMatrix.ToUnity());
-        
+
         multiplicationMatrix = testMatrix * testMatrix;
         multiplicationMatrixDevUD = testMatrix * unityMatrix.ToDevMath();
         multiplicationMatrixUDUD = unityMatrix.ToDevMath() * unityMatrix.ToDevMath();
         multiplicationMatrixDUDU = testMatrix.ToUnity() * testMatrix.ToUnity();
         multiplicationMatrixUDU = unityMatrix * testMatrix.ToUnity();
         unityMPMatrix = unityMatrix * unityMatrix;
-        print("My DevMath matrix: " + testMatrix.ToUnity()); 
+        print("My DevMath matrix: " + testMatrix.ToUnity());
         print("My Unity matrix: " + unityMatrix);
+        print("DevMath m01 =" + testMatrix.m01 + ", m10 = " + testMatrix.m10 + ", m03 = " + testMatrix.m03 + ", m30 = " + testMatrix.m30);
+        print("Unity m01 =" + unityMatrix.m01 + ", m10 = " + unityMatrix.m10 + ", m03 = " + unityMatrix.m03 + ", m30 = " + unityMatrix.m30);
         print("Multiplication Matrix DevDev: " + multiplicationMatrix.ToUnity());
         print("Multiplication Matrix DevUD  : " + multiplicationMatrixDevUD.ToUnity());
         print("Multiplication Matrix UDUD: " + multiplicationMatrixUDUD.ToUnity());
@@ -59,7 +61,6 @@ public class TestScript : MonoBehaviour
         print("Multiplication Matrix UDU: " + multiplicationMatrixUDU.ToDevMath().ToUnity());
         print("Multiplication Matrix UU    : " + unityMPMatrix);
         print("^^ ALL MATRICES ABOVE SHOULD BE EQUAL ^^");
-
 
         print("Dot = " + DevMath.Vector2.Dot(testV1, testV2) + ", Normalized Dot = " + DevMath.Vector2.Dot(testV1.Normalized, testV2.Normalized) + ", AngleInRad = " + DevMath.Vector2.Angle(testV1, testV2) + ", AngleInDeg = " + DevMath.DevMath.RadToDeg(DevMath.Vector2.Angle(testV1, testV2)));
         print("DirectionFromAngle = (" + DevMath.Vector2.DirectionFromAngle(DevMath.Vector2.Angle(testV1, testV2)).x + ", " + DevMath.Vector2.DirectionFromAngle(DevMath.Vector2.Angle(testV1, testV2)).y + ")");
@@ -70,15 +71,19 @@ public class TestScript : MonoBehaviour
         print(DevMath.DevMath.RadToDeg(Mathf.Acos(DevMath.Vector2.Dot(testV1, testV2) / (testV1.Magnitude * testV2.Magnitude))));
         print("Atan2: Is this " + DevMath.DevMath.RadToDeg(Mathf.Atan2(testV2.y - testV1.y, testV2.x - testV2.x)) + " the same as " + DevMath.DevMath.RadToDeg((Mathf.Atan2(testV2.y, testV2.x) - Mathf.Atan2(testV1.y, testV1.x))) + " ? Nope...");
 
-        print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-5, -10, -7.5f));
-        print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-10, -5, -7.5f));
-        print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(5, 10, 7.5f));
-        print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(10, 5, 7.5f));
-        print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-5, 5, 0));
-        print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-10, 5, -2.5f));
-        print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-5, -10, 80));
-        print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-10, -5, 80f));
-        print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-5, -10, -80));
-        print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-10, -5, -80f));
+        //print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-5, -10, -7.5f));
+        //print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-10, -5, -7.5f));
+        //print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(5, 10, 7.5f));
+        //print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(10, 5, 7.5f));
+        //print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-5, 5, 0));
+        //print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-10, 5, -2.5f));
+        //print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-5, -10, 80));
+        //print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-10, -5, 80f));
+        //print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-5, -10, -80));
+        //print("Inverse Lerp: " + DevMath.DevMath.InverseLerp(-10, -5, -80f));
+
+        //print(testMatrix.Rotate(new DevMath.Vector3(3, 5, 2)));
+        DevMath.Vector2 lolV = new DevMath.Vector2(5, 4) / 0;
+        print(lolV.ToUnity());
     }
 }
